@@ -1,0 +1,99 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Your API Title",
+      "version": "1.0.0",
+      "description": "Description of your API"
+    },
+    "paths": {
+      "/api/upload": {
+        "post": {
+          "summary": "Upload a file",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userName": { "type": "string" },
+                    "email": { "type": "string" },
+                    "files": { "type": "string", "format": "binary" },
+                    "text": { "type": "string" }
+                  },
+                  "required": ["userName", "email", "files"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "File uploaded successfully"
+            },
+            "400": {
+              "description": "File not uploaded"
+            }
+          }
+        }
+      },
+      "/api/comments": {
+        "post": {
+          "summary": "Create a new comment",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userName": { "type": "string"},
+                    "email": { "type": "string" },
+                    "text": { "type": "string" }
+                  },
+                  "required": ["userName", "email"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+                "description": "200 OK",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": { "type": "boolean", "example": false },
+                        "message": { "type": "string", "example": "Comment created successfully" },
+                        "comment": {"type": "object", "example": {
+                            "id": 26,
+                            "userName": "test name",
+                            "email": "test@gmail.com",
+                            "text": "test",
+                            "updatedAt": "2024-03-31T21:42:42.276Z",
+                            "createdAt": "2024-03-31T21:42:42.276Z"
+                        }}
+                      }
+                    }
+                  }
+                }
+            },
+            "500": {
+                "description": "Internal Server Error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "success": { "type": "boolean", "example": false },
+                        "error": { "type": "string", "example": "notNull Violation: comment.userName cannot be null" }
+                      }
+                    }
+                  }
+                }
+              } 
+          }
+        }
+      }
+    }
+  }

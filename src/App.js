@@ -1,6 +1,8 @@
 const express = require('express');
 const Database = require('./database/db');
 const CommentsRouter = require('./routes/comment');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const UploadRouter = require('./routes/upload');
 
 class App {
@@ -9,6 +11,7 @@ class App {
     this.setupMiddleware();
     this.setupRoutes();
     this.setupDatabase();
+    this.setupSwagger();
     this.port = process.env.PORT || 3000
   }
 
@@ -34,6 +37,10 @@ class App {
       });
   }
 
+  setupSwagger() {
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+  }
+
   start() {
     this.app.listen(this.port, () => {
       console.log(`Server is running on port ${this.port}`);
@@ -42,4 +49,3 @@ class App {
 }
 
 module.exports = App;
-
