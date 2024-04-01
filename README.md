@@ -26,6 +26,17 @@ npm install
 npm start
 ```
 
+4. Конфигурация .env
+Создайте файл .env в директории проекта там где находятся package.json и package-lock.json
+```
+AWS_ACCESS_KEY_ID=**********
+AWS_SECRET_ACCESS_KEY=**********
+AWS_REGION=eu-north
+S3_BUCKET_NAME=commentsfiles
+```
+
+Данные креды используются для сохранения файла в виде url'a по методу upload
+
 ## **API Endpoints**
 
 В качестве документации можно перейти на /api-docs для ознакомлением с endpoints.
